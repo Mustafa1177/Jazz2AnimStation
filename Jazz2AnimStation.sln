@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazz2AnimStation", "Jazz2AnimStation\Jazz2AnimStation.csproj", "{97247271-9B04-4B27-BB50-41F758D7CAE5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JJ2AnimLib", "D:\M\Programs\_JJ2 Things\JJ2AnimLib\JJ2AnimLib\JJ2AnimLib.csproj", "{DB9A9DA5-B12D-49BA-9DEB-B1A1164BD83D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{97247271-9B04-4B27-BB50-41F758D7CAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97247271-9B04-4B27-BB50-41F758D7CAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97247271-9B04-4B27-BB50-41F758D7CAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9A9DA5-B12D-49BA-9DEB-B1A1164BD83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9A9DA5-B12D-49BA-9DEB-B1A1164BD83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9A9DA5-B12D-49BA-9DEB-B1A1164BD83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9A9DA5-B12D-49BA-9DEB-B1A1164BD83D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
