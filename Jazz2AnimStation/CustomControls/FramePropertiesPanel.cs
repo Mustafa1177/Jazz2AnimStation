@@ -6,20 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using JJ2AnimLib;
 
-namespace Jazz2AnimStation
+namespace Jazz2AnimStation.CustomControls
 {
-    public partial class Form1 : Form
+    public partial class FramePropertiesPanel : UserControl
     {
-        public Form1()
+        public FramePropertiesPanel()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            JJ2AnimFile df; 
         }
     }
 }
