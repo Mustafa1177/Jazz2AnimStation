@@ -22,7 +22,8 @@ namespace Jazz2AnimStation
 
         Font frameBoxFont = new Font("Arial", 9);
         public List<Control> LockableControls = new List<Control>(16);
-        private List<AnimationBox> animationBoxes = new List<AnimationBox>(24);
+        private List<AnimationBox> animationBoxes = new List<AnimationBox>(32);
+        private List<FrameBox> frameBoxes = new List<FrameBox>(64);
         ImageList currentFramesImageList = new ImageList();
         private FormProgression _progressionForm = new FormProgression(null, 0);
 
@@ -59,11 +60,18 @@ namespace Jazz2AnimStation
         public void SelectAnimation(int setIndex, int animIndex) //renaem to OpenAnimation
         {
             currentFramesImageList.Images.Clear();
+            frameBoxes.Clear();
             if (setIndex < Sets.Count && animIndex < Sets[setIndex].AnimationCount)
             {
                 var anim = Sets[setIndex].Animations[animIndex];
                 int maxW = 0, maxH = 0;
                 currentFramesImageList.ImageSize = new Size(64, 64);
+
+                currentOpenSetIndex = setIndex;
+                currentOpenAnimIndex = animIndex;
+
+                RefreshFrameList(flowLayoutPanelFrames, anim.Frames, false);
+
                 for (int i = 0; i < anim.FrameCount; i++)
                 {
                     if (anim.Frames[i].Width > maxW)
@@ -72,22 +80,21 @@ namespace Jazz2AnimStation
                         maxH = anim.Frames[i].Height;
                   
                     currentFramesImageList.Images.Add(anim.Frames[i].Image);
-
+         
                     //test:
-                    FrameBox frameBox = new FrameBox();
-                    frameBox.Text = (i).ToString(); ;
-                    frameBox.Image = anim.Frames[i].Image;
-                    frameBox.BorderStyle = BorderStyle.FixedSingle;
-                    frameBox.BackgroundImageLayout = ImageLayout.Center;
-                    flowLayoutPanel1.Controls.Add(frameBox);
-
-                 
+                    if(false)
+                    {
+                        FrameBox frameBox = new FrameBox();
+                        frameBox.Text = (i).ToString(); ;
+                        frameBox.Image = anim.Frames[i].Image;
+                        frameBox.BorderStyle = BorderStyle.FixedSingle;
+                        frameBox.BackgroundImageLayout = ImageLayout.Center;
+                        flowLayoutPanelFrames.Controls.Add(frameBox);
+                    }       
                     
                 }
 
-                currentOpenSetIndex = setIndex;
-                currentOpenAnimIndex = animIndex;
-
+                
 
                 DisplayAnimationPropertyEditor(Sets[setIndex].Animations[animIndex]);
                 if (Sets[setIndex].Animations[animIndex].FrameCount > 0)
@@ -183,6 +190,40 @@ namespace Jazz2AnimStation
             dest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
+        public void RefreshFrameList(Control container, IEnumerable<ProjectFrame> src, bool disposeOldChildren = false)
+        {
+
+            if (disposeOldChildren)
+            {
+                foreach (FrameBox ctrl in frameBoxes)
+                    if (!ctrl.IsDisposed)
+                        ctrl.Dispose();
+                foreach (Control ctrl in container.Controls)
+                    if (!ctrl.IsDisposed)
+                        ctrl.Dispose();
+            }
+
+            container.Controls.Clear();
+            frameBoxes.Clear();
+
+            if (src == null)
+                return;
+
+            int i = 0;
+            foreach (var item in src)
+            {
+                FrameBox frameBox = new FrameBox();
+                frameBox.Source = item;
+                frameBox.Text = (i).ToString();
+                frameBox.Image = item.Image;
+                frameBox.BorderStyle = BorderStyle.FixedSingle;
+                frameBox.BackgroundImageLayout = ImageLayout.Center;
+                frameBox.Click += frameBoxes_Click;
+                container.Controls.Add(frameBox);
+                i++;
+            }
+        }
+
 
         void DisplayAnimationPropertyEditor(ProjectAnimation src, bool updateTitleLabel = false, string newTitle = "")
         {
@@ -203,19 +244,24 @@ namespace Jazz2AnimStation
             }
         }
 
-        void DisplayFramePropertyEditor(ProjectFrame src)
+        void DisplayFramePropertyEditor(ProjectFrame src, bool updateTitleLabel = false, string newTitle = "")
         {
             _frameEditorWrapper.Source = src;
             propertyGrid1.SelectedObject = _frameEditorWrapper;
+            if (updateTitleLabel)
+                labelPropertyEditorTitle.Text = string.IsNullOrEmpty(newTitle) ? "Frame Properties" : newTitle;
+
         }
 
-        void DisplayFramePropertyEditor(int setIndex, int animIndex, int frameIndex)
+        void DisplayFramePropertyEditor(int setIndex, int animIndex, int frameIndex, bool updateTitleLabel = true, string newTitle = "")
         {
             if (setIndex >= 0 && setIndex < Sets.Count 
                 && animIndex >= 0 && animIndex < Sets[setIndex].AnimationCount 
                 && frameIndex >= 0 && frameIndex < Sets[setIndex].Animations[animIndex].FrameCount)
             {
                 DisplayFramePropertyEditor(Sets[setIndex].Animations[animIndex].Frames[0]);
+                if (updateTitleLabel)
+                    labelPropertyEditorTitle.Text = string.IsNullOrEmpty(newTitle) ? string.Format("Frame Properties (ID = {0}-{1}-{2})", setIndex, animIndex, frameIndex) : newTitle;
             }
         }
 
@@ -305,7 +351,7 @@ namespace Jazz2AnimStation
 
             frameBox.BorderStyle = BorderStyle.FixedSingle;
             frameBox.BackgroundImageLayout = ImageLayout.Center;
-            flowLayoutPanel1.Controls.Add(frameBox);
+            flowLayoutPanelFrames.Controls.Add(frameBox);
 
             SelectAnimation(54, 5);
            
@@ -352,9 +398,16 @@ namespace Jazz2AnimStation
                 currentOpenAnimIndex = animIndex;
 
                 if (animIndex >= 0 && animIndex < Sets[i].AnimationCount)
+                {
                     RefreshFrameList(listViewFrames, Sets[i].Animations[animIndex].Frames);
+                    RefreshFrameList(flowLayoutPanelFrames, Sets[i].Animations[animIndex].Frames, true);
+                }
                 else
-                    RefreshFrameList(listViewFrames, new ProjectFrame[0]);
+                {
+                    var emptyFrameArr = new ProjectFrame[0];
+                    RefreshFrameList(listViewFrames, emptyFrameArr);
+                    RefreshFrameList(flowLayoutPanelFrames, emptyFrameArr, true);
+                }
 
                 tabControlProjectContent.SelectTab(tabPageAnimations);
 
@@ -369,7 +422,7 @@ namespace Jazz2AnimStation
                 int i = Sets[currentOpenSetIndex].Animations.IndexOf(ctrl.Source);
                 if (i >= 0 && i < Sets[currentOpenSetIndex].Animations.Count)
                 {
-                    DisplayAnimationPropertyEditor(Sets[currentOpenSetIndex].Animations[i], true, string.Format("Animation Properties (ID = {0}-{1})", currentOpenSetIndex, i));
+                    DisplayAnimationPropertyEditor(Sets[currentOpenSetIndex].Animations[i], true, string.Format("Frame Properties (ID = {0}-{1})", currentOpenSetIndex, i));
 
                 }
             }
@@ -458,6 +511,19 @@ namespace Jazz2AnimStation
             var ctrl = (ToolStripMenuItem)sender;
             splitContainerFrameViews.Panel1Collapsed = ctrl.Checked;
             splitContainerFrameViews.Panel2Collapsed = !ctrl.Checked;
+        }
+
+        private void frameBoxes_Click(object sender, EventArgs e)
+        {
+            var ctrl = (FrameBox)sender;
+            if (currentOpenSetIndex >= 0 && currentOpenSetIndex < Sets.Count && currentOpenAnimIndex >= 0 && currentOpenAnimIndex < Sets[currentOpenSetIndex].AnimationCount)
+            {
+                int i = Sets[currentOpenSetIndex].Animations[currentOpenAnimIndex].Frames.IndexOf(ctrl.Source);
+                if (i >= 0 && i < Sets[currentOpenSetIndex].Animations[currentOpenAnimIndex].FrameCount)
+                {
+                    DisplayFramePropertyEditor(Sets[currentOpenSetIndex].Animations[currentOpenAnimIndex].Frames[i], true, string.Format("Animation Properties (ID = {0}-{1}-{2})", currentOpenSetIndex, currentOpenAnimIndex, i));
+                }
+            }
         }
 
         #endregion

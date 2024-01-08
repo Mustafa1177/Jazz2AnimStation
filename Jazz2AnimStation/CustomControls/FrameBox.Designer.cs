@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Jazz2AnimStation.CustomControls
 {
@@ -41,7 +42,6 @@ namespace Jazz2AnimStation.CustomControls
             this.Name = "FrameBox";
             this.Size = new System.Drawing.Size(118, 118);
             this.Load += new System.EventHandler(this.FrameBox_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrameBox_Paint);
             this.ResumeLayout(false);
 
         }

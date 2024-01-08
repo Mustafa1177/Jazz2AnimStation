@@ -126,29 +126,17 @@
   <metadata name="toolStripAnimations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>565, 17</value>
   </metadata>
-  <metadata name="toolStripFrames.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>725, 17</value>
-  </metadata>
-  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>354, 17</value>
-  </metadata>
-  <metadata name="timerTick.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>464, 17</value>
-  </metadata>
-  <metadata name="contextMenuStripAnimBox.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>862, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripButtonDeleteAnimation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF2SURBVChTY/g9f+Lt9x0V/081lO2c7++uwIAFfK2vyHmQ
-        l3EzTl66k2FXdPD9/wv6//+f2/P/XXbyp1wtNQ+oOobnKSmKf/KTz+2JDPiqx84OETc2NmZtcrCpvp4f
+        l3EzTl66k2FXdPD9/wv6//+f2/P/XXbyp1wtNQ+oOobnKSmKf/KTz+2JDPiqx84OETc2NmZtcrCpvpIf
         /+d/iuf/t2ZS/xcZ6wRcjwzz/Woh979dlv+YFgMDD1gxMtBmZ1eeKM2/+Z40w/8L8qz/j8pw/A9mZpgD
         lcYNNmuK3bguy/T/pCzrf28xMSWoMHbwyNtq82NTyf/tChJ7jquKvbusLXwfKoUJ7gY5bLunzvF/lprE
         BRDfXVhY/Y253P8+RdF+sAJkcCTEu/u+idj/o0rcX/gYGJShwgxREiKeT0yl/5vz8qpChRgYjltb21xx
         1v7/0ED0vz8/dwFUGA7apQUnz5fh3gTlAsPa33XtM1/D/+tV+Z9DhVCAPQMDy3pFmbPhPDyaYIHL0f4X
-        f0U7/J+lJLoKLIAFhIiJRe1QlPMBczqMdOp/Rrv+d+ThDAIL4AUMDACmI3+4eQG7DQAAAABJRU5ErkJg
+        f0U7/J+lJLoKLIAFhIiJRe1QlPMBczqMdOp/Rrv+d+ThDAIL4AUMDACggH+1N/c7GAAAAABJRU5ErkJg
         gg==
 </value>
   </data>
@@ -166,6 +154,9 @@
         BiDmEER+M72JA7ofRaXi8Tj+11FUSFF+AW3Z3UA26JZHAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="toolStripFrames.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>725, 17</value>
+  </metadata>
   <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -225,4 +216,13 @@
         BiDmEER+M72JA7ofRaXi8Tj+11FUSFF+AW3Z3UA26JZHAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>354, 17</value>
+  </metadata>
+  <metadata name="timerTick.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>464, 17</value>
+  </metadata>
+  <metadata name="contextMenuStripAnimBox.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>862, 17</value>
+  </metadata>
 </root>
